@@ -21,7 +21,12 @@ const devConfig = {
             exposes: {
                 './CartComponent': './src/bootstrap',
             },
-            shared: packageJson.dependencies,
+            shared: [...packageJson.dependencies, {
+                "@mfe-barcamp-react/context_providers": {
+                    import: "@mfe-barcamp-react/context_providers",
+                    requiredVersion: require("../context_providers/package.json").version,
+                }
+            }],
         }),
     ],
 };

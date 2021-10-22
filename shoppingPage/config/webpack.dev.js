@@ -21,7 +21,12 @@ const devConfig = {
                 product_components: 'product_components@http://localhost:8081/remoteEntry.js',
                 cart: 'cart@http://localhost:8082/remoteEntry.js',
             },
-            shared: packageJson.dependencies,
+            shared: [...packageJson.dependencies, {
+                "@mfe-barcamp-react/context_providers": {
+                    import: "@mfe-barcamp-react/context_providers",
+                    requiredVersion: require("../context_providers/package.json").version,
+                }
+            }],
         }),
     ],
 };

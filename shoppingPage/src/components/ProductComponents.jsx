@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { render } from "product_components/ProductComps";
 import { useHistory } from "react-router-dom";
+import { CartContext } from "@context_providers";
 
-const ProductComponents = ({data}) => {
+const ProductComponents = ({ data }) => {
   const ref = useRef(null);
   const history = useHistory();
 
@@ -16,7 +17,7 @@ const ProductComponents = ({data}) => {
           history.push(nextPathname);
         }
       },
-      initialData: data
+      initialData: data,
     });
 
     if (onParentNavigate) {
@@ -24,7 +25,14 @@ const ProductComponents = ({data}) => {
     }
   }, []);
 
-  return <><div ref={ref}></div><div><button>Add Product to cart</button></div></>;
+  return (
+    <>
+      <div ref={ref}></div>
+      <div>
+        <button>Add Product to cart</button>
+      </div>
+    </>
+  );
 };
 
 export { ProductComponents };
