@@ -47,6 +47,11 @@ typings/
 # TypeScript cache
 *.tsbuildinfo
 
+# IDE stuff
+.idea
+.DS_Store
+.vscode
+
 # Optional npm cache directory
 .npm
 
