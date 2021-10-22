@@ -12,9 +12,9 @@ const devConfig = {
     },
     plugins: [
         new ModuleFederationPlugin({
-            name: 'container',
+            name: 'product_components',
             remotes: {
-                marketing: `marketing@${domain}/marketing/remoteEntry.js`
+                product_components: `product_comps@${domain}/product_comps/remoteEntry.js`
             },
             shared: packageJson.dependencies,
         }),
