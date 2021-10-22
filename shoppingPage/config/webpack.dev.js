@@ -6,22 +6,20 @@ const packageJson = require('../package.json');
 const devConfig = {
     mode: 'development',
     output: {
-        publicPath: 'http://localhost:8081/',
+        publicPath: 'http://localhost:8080/',
     },
     devServer: {
-        port: 8081,
+        port: 8080,
         historyApiFallback: {
             index: '/index.html',
         },
     },
     plugins: [
         new ModuleFederationPlugin({
-            name: 'product_components',
-            filename: 'remoteEntry.js',
-            exposes: {
-                './ProductComps': './src/bootstrap',
-                './ProductComponent': './src/components/ProductComponent',
-                './ProductDetail': './src/components/ProductDetail',
+            name: 'shoppingPage',
+            remotes: {
+                product_components: 'product_components@http://localhost:8081/remoteEntry.js',
+                cart: 'cart@http://localhost:8082/remoteEntry.js',
             },
             shared: packageJson.dependencies,
         }),
