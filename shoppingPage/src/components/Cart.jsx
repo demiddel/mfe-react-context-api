@@ -1,12 +1,15 @@
-import React from 'react';
+import React from "react";
+import {useCart} from "../hooks/useCart";
 
-const Cart = (props) => {
+const Cart = () => {
+  const { items } = useCart();
 
-    return (
-        <div>
-            Cart
-        </div>
-    );
+  return (
+    <div>
+        Cart:
+        {items.map((item, i) => <li>{item}</li>)}
+    </div>
+  );
 };
 
-export {Cart};
+export { Cart };

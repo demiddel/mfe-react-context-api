@@ -1,15 +1,10 @@
 {
-  "name": "ContextProviderComponent",
-  "version": "1.0.0",
+  "name": "@mfe-barcamp-react/context_providers",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "private": true,
+  "main": "./src/index.js",
+  "peerDependencies": {
     "react": "^17.0.2"
   }
 }

@@ -14,14 +14,16 @@ const ProductDetail = ({ history, location: { state } }) => {
     }
     const { product } = state;
 
-    return (<>
-        <button onClick={() => history.goBack()}>Go Back</button>
-        <ul>
-        <li>Product: {product.name}</li>
-        <li>Price: {product.price}</li>
-        <li>Color: {product.color}</li>
-    </ul>
-    </>);
+    return (
+        <>
+            <button onClick={() => history.goBack()}>Go Back</button>
+            <ul>
+                <li>Product: {product.name}</li>
+                <li>Price: {product.price}</li>
+                <li>Color: {product.color}</li>
+            </ul>
+        </>
+    );
 };
 
 export { ProductDetail };

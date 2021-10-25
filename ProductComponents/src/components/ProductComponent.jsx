@@ -7,7 +7,7 @@ const ProductComponent = ({ product }) => {
     }
 
     return (
-        <section>
+        <section style={{"backgroundColor": "#81ecec"}}>
             <main>Product: {product.name}</main>
             <aside>
                 <Link

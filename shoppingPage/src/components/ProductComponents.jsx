@@ -1,11 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import { render } from "product_components/ProductComps";
 import { useHistory } from "react-router-dom";
-import { CartContext } from "@context_providers";
+import { useCart } from "../hooks/useCart";
 
 const ProductComponents = ({ data }) => {
   const ref = useRef(null);
   const history = useHistory();
+  const { setItems } = useCart();
 
   useEffect(() => {
     const { onParentNavigate } = render(ref.current, {
@@ -29,7 +30,9 @@ const ProductComponents = ({ data }) => {
     <>
       <div ref={ref}></div>
       <div>
-        <button>Add Product to cart</button>
+        <button onClick={() => setItems((props) => [...props, data])}>
+          Add Product to cart
+        </button>
       </div>
     </>
   );
