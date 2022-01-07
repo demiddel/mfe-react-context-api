@@ -12,9 +12,9 @@ const devConfig = {
     },
     plugins: [
         new ModuleFederationPlugin({
-            name: 'product_components',
+            name: 'context_providers',
             remotes: {
-                product_components: `product_components@${domain}/product_comps/remoteEntry.js`
+                product_components: `context_providers@${domain}/context_providers/remoteEntry.js`
             },
             shared: packageJson.dependencies,
         }),

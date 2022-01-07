@@ -1,5 +1,5 @@
 {
-  "name": "CartComponent",
+  "name": "@mfe-barcamp-react/cart_component",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",

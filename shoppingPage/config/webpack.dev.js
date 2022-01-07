@@ -14,6 +14,11 @@ const devConfig = {
         historyApiFallback: {
             index: '/index.html',
         },
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+          }
     },
     plugins: [
         new ModuleFederationPlugin({
@@ -21,6 +26,7 @@ const devConfig = {
             remotes: {
                 product_components: 'product_components@http://localhost:8081/remoteEntry.js',
                 cart: 'cart@http://localhost:8082/remoteEntry.js',
+                context_providers: 'context_providers@http://localhost:8083/remoteEntry.js',
             },
             shared: packageJson.dependencies,
         }),

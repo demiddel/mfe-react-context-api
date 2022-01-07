@@ -36,12 +36,20 @@ const render = (
 if (process.env.NODE_ENV === 'development') {
     const el = document.querySelector('#_dev-product-components');
 
-    const initialData = {
-        id: 1,
-        name: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        color: faker.commerce.color(),
-    };
+    const initialData = [
+        {
+            id: 1,
+            name: faker.commerce.productName(),
+            price: faker.commerce.price(),
+            color: faker.commerce.color(),
+        },
+        {
+            id: 2,
+            name: faker.commerce.productName(),
+            price: faker.commerce.price(),
+            color: faker.commerce.color(),
+        },
+    ];
 
     if (el) {
         render(el, { defaultHistory: createBrowserHistory(), initialData });

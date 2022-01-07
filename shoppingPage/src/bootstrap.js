@@ -4,27 +4,21 @@ import App from './App';
 
 import faker from "faker";
 
-// const generateMockData = () => {
-//     let mockData = [];
-//
-//     for (let i = 0; i < 5; i++) {
-//         mockData.push({
-//             id: i,
-//             name: faker.commerce.productName(),
-//             price: faker.commerce.price(),
-//             color: faker.commerce.color(),
-//             amount: Math.ceil(Math.random() * 10),
-//         });
-//     }
-//     return mockData;
-// };
+const generateMockData = () => {
+    let mockData = [];
 
-const initialData = {
-    id: 11,
-    name: faker.commerce.productName(),
-    price: faker.commerce.price(),
-    color: faker.commerce.color(),
-    amount: Math.ceil(Math.random() * 10),
-}
+    for (let i = 0; i < 5; i++) {
+        mockData.push({
+            id: i + 1,
+            name: faker.commerce.productName(),
+            price: faker.commerce.price(),
+            color: faker.commerce.color(),
+            amount: Math.ceil(Math.random() * 10),
+        });
+    }
+    return mockData;
+};
 
-ReactDom.render(<App data={initialData} />, document.getElementById('root'))
+const initialData = generateMockData();
+
+ReactDom.render(<App data={initialData} />, document.getElementById('root'));

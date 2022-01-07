@@ -1,17 +1,20 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-// import { ShoppingPage } from "./components/ShoppingPage";
 import { Cart } from "./components/Cart";
-import { ProductComponents } from "./components/ProductComponents";
-import {Header} from "./components/Header";
+import { ProductListComponent } from "./components/ProductListComponent";
+import { Header } from "./components/Header";
+import { ShopPage } from "./components/ShopPage";
+import { CartContextProvider } from "context_providers/CartContext";
 
 export default ({ data }) => (
-  <BrowserRouter>
+  <CartContextProvider>
+    <BrowserRouter>
       <Header />
       <Switch>
-        {/*<Route path="/" component={ShoppingPage} />*/}
-      <Route path="/cart" component={Cart} />
-      <Route path="/" render={() => <ProductComponents data={data} />} />
-    </Switch>
-  </BrowserRouter>
+        <Route path="/cart" component={Cart} />
+        <Route path="/products" render={() => <ProductListComponent data={data} />} />
+        <Route path="/" render={() => <ShopPage data={data} />} />
+      </Switch>
+    </BrowserRouter>
+  </CartContextProvider>
 );
