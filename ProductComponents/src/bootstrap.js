@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App';
 
 // TODO: only used for dev, might be a better solution so this isn't being imported
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 const render = (
-    el,
+    container,
     { onNavigate, defaultHistory, initialPath, initialData }
 ) => {
     const history =
@@ -20,7 +20,8 @@ const render = (
         history.listen(onNavigate);
     }
 
-    ReactDom.render(<App history={history} data={initialData} />, el);
+    const root = createRoot(container);
+    root.render(<App history={history} data={initialData} />);
 
     return {
         onParentNavigate: ({ pathname: nextPathname }) => {
@@ -41,13 +42,13 @@ if (process.env.NODE_ENV === 'development') {
             id: 1,
             name: faker.commerce.productName(),
             price: faker.commerce.price(),
-            color: faker.commerce.color(),
+            department: faker.commerce.department(),
         },
         {
             id: 2,
             name: faker.commerce.productName(),
             price: faker.commerce.price(),
-            color: faker.commerce.color(),
+            department: faker.commerce.department(),
         },
     ];
 

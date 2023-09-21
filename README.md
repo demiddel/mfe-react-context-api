@@ -1,14 +1,19 @@
 # mfe-barcamp-react
+
 Micro Frontend using React
 
 ## Dev Setup
+
 Run in each folder:
-- `yarn && yarn start`
+
+- `yarn install && yarn start`
 
 ## Build packages
+
 - `yarn build`
 
 ## Topics covered
+
 - Using a framework (React)
 - Routing
 - Shared dependencies
@@ -16,6 +21,7 @@ Run in each folder:
 - ...
 
 ## Packages
+
 - ProductComponents (ProductComponent, ProductDetailComponent, ProductListComponent)
 - Context Providers (CartContext)
 - ShopPage (CartComponent, ProductListComponent)

@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
-import faker from "faker";
+import faker from 'faker';
 
 const generateMockData = () => {
     let mockData = [];
@@ -20,5 +20,6 @@ const generateMockData = () => {
 };
 
 const initialData = generateMockData();
+const root = createRoot(document.getElementById('root'));
 
-ReactDom.render(<App data={initialData} />, document.getElementById('root'));
+root.render(<App data={initialData} />);
