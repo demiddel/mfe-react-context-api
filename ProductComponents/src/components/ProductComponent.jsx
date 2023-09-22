@@ -11,10 +11,8 @@ const ProductComponent = ({ product }) => {
             <main>Product: {product.name}</main>
             <aside>
                 <Link
-                    to={{
-                        pathname: `/detail/${product.id}`,
-                        state: { product },
-                    }}
+                    to={`/detail/${product.id}`}
+                    state={ product }
                 >
                     <button>Show Detail</button>
                 </Link>

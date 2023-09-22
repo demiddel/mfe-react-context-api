@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 const generateMockData = () => {
     let mockData = [];

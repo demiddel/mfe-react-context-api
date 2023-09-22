@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createMemoryHistory, createBrowserHistory } from 'history';
+import { RouterProvider } from 'react-router-dom';
 import App from './App';
 
 // TODO: only used for dev, might be a better solution so this isn't being imported
@@ -15,13 +16,12 @@ const render = (
         createMemoryHistory({
             initialEntries: [initialPath],
         });
-
     if (onNavigate) {
         history.listen(onNavigate);
     }
 
     const root = createRoot(container);
-    root.render(<App history={history} data={initialData} />);
+    root.render(<App history={history} data={initialData} />, <RouterProvider router={defaultHistory} />);
 
     return {
         onParentNavigate: ({ pathname: nextPathname }) => {
