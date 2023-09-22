@@ -12,7 +12,7 @@ const generateMockData = () => {
             id: i + 1,
             name: faker.commerce.productName(),
             price: faker.commerce.price(),
-            color: faker.commerce.color(),
+            department: faker.commerce.department(),
             amount: Math.ceil(Math.random() * 10),
         });
     }
