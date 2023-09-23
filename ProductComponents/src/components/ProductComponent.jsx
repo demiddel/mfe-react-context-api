@@ -6,15 +6,14 @@ const ProductComponent = ({ product }) => {
         return <>No Data Available</>;
     }
 
+    // FIXME: State is not being transferred to ProductDetail component
     return (
         <section style={{"backgroundColor": "#81ecec"}}>
             <main>Product: {product.name}</main>
             <aside>
                 <Link
-                    to={{
-                        pathname: `/detail/${product.id}`,
-                        state: { product },
-                    }}
+                    to={`/detail/${product.id}`}
+                    state={product}
                 >
                     <button>Show Detail</button>
                 </Link>

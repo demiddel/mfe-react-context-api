@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const ProductDetail = ({ history }) => {
-    const { state } = useLocation();
+const ProductDetail = () => {
+    const { state: product } = useLocation()
+    const navigate = useNavigate();
 
-    if (!state) {
+    if (!Boolean(product)) {
         return (
             <>
                 <div>No Product Data Available</div>
@@ -14,15 +15,21 @@ const ProductDetail = ({ history }) => {
             </>
         );
     }
-    const { product } = state;
+    function navigateBack() {
+        if (window.history.state && window.history.state.idx > 0) {
+            navigate(-1);
+        } else {
+            navigate('/', { replace: true }); // the current entry in the history stack will be replaced with the new one with { replace: true }
+        }
+    }
 
     return (
         <>
-            <button onClick={() => history.goBack()}>Go Back</button>
+            <button onClick={navigateBack}>Go Back</button>
             <ul>
                 <li>Product: {product.name}</li>
                 <li>Price: {product.price}</li>
-                <li>Color: {product.color}</li>
+                <li>Department: {product.department}</li>
             </ul>
         </>
     );

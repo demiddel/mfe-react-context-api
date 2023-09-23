@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createMemoryHistory, createBrowserHistory } from 'history';
-import { RouterProvider, useLocation } from 'react-router-dom';
+import { RouterProvider, useLocation, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 
 // TODO: only used for dev, might be a better solution so this isn't being imported
@@ -21,11 +21,13 @@ const render = (
     }
 
     const root = createRoot(container);
-    root.render(<App history={history} data={initialData} />, <RouterProvider router={defaultHistory} />);
+    // TODO: Probably needs the RouterProvider here to create a real BrowserRouter to work with the Link and context
+    // FIXME: The actual navigation is not working 
+    root.render(<App history={history} data={initialData} />);
 
     return {
         onParentNavigate: ({ pathname: nextPathname }) => {
-            const { pathname } = useLocation();
+            const { pathname } = history.location;
 
             if (pathname !== nextPathname) {
                 history.push(nextPathname);
