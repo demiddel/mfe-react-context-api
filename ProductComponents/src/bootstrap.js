@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createMemoryHistory, createBrowserHistory } from 'history';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider, useLocation } from 'react-router-dom';
 import App from './App';
 
 // TODO: only used for dev, might be a better solution so this isn't being imported
@@ -25,7 +25,7 @@ const render = (
 
     return {
         onParentNavigate: ({ pathname: nextPathname }) => {
-            const { pathname } = history.location;
+            const { pathname } = useLocation();
 
             if (pathname !== nextPathname) {
                 history.push(nextPathname);
@@ -35,7 +35,7 @@ const render = (
 };
 
 if (process.env.NODE_ENV === 'development') {
-    const el = document.querySelector('#_dev-product-components');
+    const container = document.querySelector('#_dev-product-components');
 
     const initialData = [
         {
@@ -52,8 +52,8 @@ if (process.env.NODE_ENV === 'development') {
         },
     ];
 
-    if (el) {
-        render(el, { defaultHistory: createBrowserHistory(), initialData });
+    if (container) {
+        render(container, { defaultHistory: createBrowserHistory(), initialData });
     }
 }
 

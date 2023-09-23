@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const ProductDetail = ({ history, location: { state } }) => {
+const ProductDetail = ({ history }) => {
+    const { state } = useLocation();
+
     if (!state) {
         return (
             <>

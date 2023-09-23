@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Cart } from "./components/Cart";
 import { ProductListComponent } from "./components/ProductListComponent";
 import { Header } from "./components/Header";
@@ -10,11 +10,11 @@ export default ({ data }) => (
   <CartContextProvider>
     <BrowserRouter>
       <Header />
-      <Switch>
-        <Route path="/cart" component={Cart} />
-        <Route path="/products" render={() => <ProductListComponent data={data} />} />
-        <Route path="/" render={() => <ShopPage data={data} />} />
-      </Switch>
+      <Routes>
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/products" element={<ProductListComponent data={data} />} />
+        <Route path="/" element={<ShopPage data={data} />} />
+      </Routes>
     </BrowserRouter>
   </CartContextProvider>
 );
