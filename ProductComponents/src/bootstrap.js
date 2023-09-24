@@ -62,7 +62,10 @@ if (process.env.NODE_ENV === 'development') {
     ];
 
     if (container) {
-        render(container, { defaultHistory: createBrowserHistory(), initialData, defaultRouter: createBrowserRouter(routes) });
+        //TODO: Need to refactor to pass initialData to the ProductListComponent
+        const routesWithInitialData = [{ path: '/', element: <ProductListComponent />, products: initialData}, { path: '/detail:id', element: <ProductDetail />}];
+
+        render(container, { defaultHistory: createBrowserHistory(), initialData, defaultRouter: createBrowserRouter(routesWithInitialData) });
     }
 }
 
