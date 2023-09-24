@@ -2,7 +2,9 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const ProductDetail = () => {
-    const { state: product } = useLocation()
+    const { state: product } = useLocation();
+    console.log('ProductDetail: product: ', product);
+    
     const navigate = useNavigate();
 
     if (!Boolean(product)) {

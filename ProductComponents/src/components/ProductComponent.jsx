@@ -5,6 +5,7 @@ const ProductComponent = ({ product }) => {
     if (!product) {
         return <>No Data Available</>;
     }
+    console.log('ProductComponent: product: ', product);
 
     // FIXME: State is not being transferred to ProductDetail component
     return (

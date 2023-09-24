@@ -1,21 +1,28 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createMemoryHistory, createBrowserHistory } from 'history';
-import { RouterProvider, useLocation, createBrowserRouter } from 'react-router-dom';
-import App from './App';
+import { RouterProvider, createBrowserRouter, createMemoryRouter } from 'react-router-dom';
+import Root from './App';
 
 // TODO: only used for dev, might be a better solution so this isn't being imported
 import { faker } from '@faker-js/faker';
 
+// FIXME: Router issues, probably need to import RouterProvider here and select which is needed to then wrap in render method.
+// Refactored App.js to only export RouterProvider
+import { ProductListComponent } from './components/ProductListComponent';
+import { ProductDetail } from './components/ProductDetail';
+
+const routes = [{ path: '/', element: <ProductListComponent />, products: []}, { path: '/detail:id', element: <ProductDetail />}];
 const render = (
     container,
-    { onNavigate, defaultHistory, initialPath, initialData }
+    { onNavigate, defaultHistory, initialPath, initialData, defaultRouter }
 ) => {
     const history =
         defaultHistory ||
         createMemoryHistory({
             initialEntries: [initialPath],
         });
+    const router = defaultRouter || createMemoryRouter(routes, {initialEntries: [initialPath]});
     if (onNavigate) {
         history.listen(onNavigate);
     }
@@ -23,7 +30,7 @@ const render = (
     const root = createRoot(container);
     // TODO: Probably needs the RouterProvider here to create a real BrowserRouter to work with the Link and context
     // FIXME: The actual navigation is not working 
-    root.render(<App history={history} data={initialData} />);
+    root.render(<Root router={router} />);
 
     return {
         onParentNavigate: ({ pathname: nextPathname }) => {
@@ -55,7 +62,7 @@ if (process.env.NODE_ENV === 'development') {
     ];
 
     if (container) {
-        render(container, { defaultHistory: createBrowserHistory(), initialData });
+        render(container, { defaultHistory: createBrowserHistory(), initialData, defaultRouter: createBrowserRouter(routes) });
     }
 }
 
