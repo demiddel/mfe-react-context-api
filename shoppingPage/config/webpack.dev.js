@@ -24,7 +24,7 @@ const devConfig = {
         new ModuleFederationPlugin({
             name: 'shoppingPage',
             remotes: {
-                product_components: 'product_components@http://localhost:8081/remoteEntry.js',
+                // product_components: 'product_components@http://localhost:8081/remoteEntry.js',
                 cart: 'cart@http://localhost:8082/remoteEntry.js',
                 context_providers: 'context_providers@http://localhost:8083/remoteEntry.js',
             },

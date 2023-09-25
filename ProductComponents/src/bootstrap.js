@@ -12,35 +12,40 @@ import { faker } from '@faker-js/faker';
 import { ProductListComponent } from './components/ProductListComponent';
 import { ProductDetail } from './components/ProductDetail';
 
-const routes = [{ path: '/', element: <ProductListComponent />, products: []}, { path: '/detail:id', element: <ProductDetail />}];
+const routes = [
+    { path: '/detail/:id', element: <ProductDetail />},
+    { path: '/', element: <ProductListComponent />, products: []},
+];
+
 const render = (
     container,
     { onNavigate, defaultHistory, initialPath, initialData, defaultRouter }
 ) => {
-    const history =
-        defaultHistory ||
-        createMemoryHistory({
-            initialEntries: [initialPath],
-        });
+    // const history =
+    //     defaultHistory ||
+    //     createMemoryHistory({
+    //         initialEntries: [initialPath],
+    //     });
     const router = defaultRouter || createMemoryRouter(routes, {initialEntries: [initialPath]});
-    if (onNavigate) {
-        history.listen(onNavigate);
-    }
+
+    // if (onNavigate) {
+    //     history.listen(onNavigate);
+    // }
 
     const root = createRoot(container);
     // TODO: Probably needs the RouterProvider here to create a real BrowserRouter to work with the Link and context
     // FIXME: The actual navigation is not working 
     root.render(<Root router={router} />);
 
-    return {
-        onParentNavigate: ({ pathname: nextPathname }) => {
-            const { pathname } = history.location;
+    // return {
+    //     onParentNavigate: ({ pathname: nextPathname }) => {
+    //         const { pathname } = history.location;
 
-            if (pathname !== nextPathname) {
-                history.push(nextPathname);
-            }
-        },
-    };
+    //         if (pathname !== nextPathname) {
+    //             history.push(nextPathname);
+    //         }
+    //     },
+    // };
 };
 
 if (process.env.NODE_ENV === 'development') {

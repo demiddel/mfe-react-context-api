@@ -13,7 +13,7 @@ const Cart = () => {
               Price: {item.price}
               <button onClick={() => removeCartItem(item.id)}>Remove Item</button>
               </div>)}
-              Total: ${cartData.reduce((sum, item) => sum + Number(item.price), 0)};
+              Total: ${cartData.reduce((sum, item) => sum + Number(item.price), 0)}
         </div>
     );
 };

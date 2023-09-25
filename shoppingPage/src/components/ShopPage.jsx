@@ -1,10 +1,10 @@
 import React from 'react';
-import { ProductListComponent } from "./ProductListComponent";
+// import { ProductListComponent } from "./ProductListComponent";
 import { Cart } from "./Cart";
 
 const ShopPage = ({data}) => {
     return (<>
-        <ProductListComponent data={data} />
+        {/* <ProductListComponent data={data} /> */}
         <hr/>
         <Cart />
     </>);
