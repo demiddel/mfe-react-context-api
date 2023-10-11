@@ -1,13 +1,21 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+    Link,
+    useLoaderData,
+    useLocation,
+    useNavigate,
+    useParams,
+} from 'react-router-dom';
 
 const ProductDetail = () => {
-    const { state: product } = useLocation();
-    console.log('ProductDetail: product: ', product);
-    
+    const loaderProduct = useLoaderData();
+    const { state } = useLocation();
+    console.log('state: ', state);
+    console.log('ProductDetail: product: ', loaderProduct);
+
     const navigate = useNavigate();
 
-    if (!Boolean(product)) {
+    if (!Boolean(loaderProduct)) {
         return (
             <>
                 <div>No Product Data Available</div>
@@ -29,9 +37,10 @@ const ProductDetail = () => {
         <>
             <button onClick={navigateBack}>Go Back</button>
             <ul>
-                <li>Product: {product.name}</li>
-                <li>Price: {product.price}</li>
-                <li>Department: {product.department}</li>
+                <li>Product: {loaderProduct.name}</li>
+                <li>Id: {loaderProduct.id}</li>
+                <li>Price: {loaderProduct.price}</li>
+                <li>Department: {loaderProduct.department}</li>
             </ul>
         </>
     );

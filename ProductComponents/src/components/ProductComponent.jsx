@@ -5,17 +5,12 @@ const ProductComponent = ({ product }) => {
     if (!product) {
         return <>No Data Available</>;
     }
-    console.log('ProductComponent: product: ', product);
 
-    // FIXME: State is not being transferred to ProductDetail component
     return (
-        <section style={{"backgroundColor": "#81ecec"}}>
+        <section style={{ backgroundColor: '#81ecec' }}>
             <main>Product: {product.name}</main>
             <aside>
-                <Link
-                    to={`/detail/${product.id}`}
-                    state={product}
-                >
+                <Link to={`/detail/${product.id}`}>
                     <button>Show Detail</button>
                 </Link>
             </aside>
