@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, createMemoryRouter } from 'react-router-dom';
 
 import { Layout } from './components/shared/Layout';
 import Root from './App';
@@ -22,8 +22,35 @@ import { ErrorRoute } from './components/shared/ErrorRoute';
 //     { path: '/', element: <ProductListComponent />, loader: () => [] },
 // ];
 
-const render = (container, { defaultRouter }) => {
-    const router = defaultRouter;
+const render = (container, { defaultRouter, pathname, hydrationData }) => {
+    const routes = (initialData) => [
+        {
+            element: <Layout />,
+            errorElement: <ErrorRoute />,
+            children: [
+                {
+                    path: '/',
+                    index: true,
+                    element: <ProductListComponent />,
+                    loader: () => initialData,
+                },
+                {
+                    path: '/detail/:id',
+                    element: <ProductDetail />,
+                    loader: ({ params }) =>
+                        initialData.find((d) => d.id === Number(params.id)),
+                },
+            ],
+        },
+    ];
+    const router =
+        defaultRouter ||
+        createMemoryRouter(routes([]), {
+            basename: pathname,
+            initialEntries: [pathname],
+            initialIndex: 0,
+            hydrationData,
+        });
     const root = createRoot(container);
 
     root.render(<Root router={router} />);

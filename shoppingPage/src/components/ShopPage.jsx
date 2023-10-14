@@ -1,13 +1,16 @@
 import React from 'react';
-// import { ProductListComponent } from "./ProductListComponent";
-import { Cart } from "./Cart";
+
+import { ProductListComponent } from './ProductListComponent';
+import { Cart } from './Cart';
 
 const ShopPage = () => {
-    return (<>
-        {/* <ProductListComponent data={data} /> */}
-        <hr/>
-        <Cart />
-    </>);
+    return (
+        <>
+            <ProductListComponent />
+            <hr />
+            <Cart />
+        </>
+    );
 };
 
 export { ShopPage };

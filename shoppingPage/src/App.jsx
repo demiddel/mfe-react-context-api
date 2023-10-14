@@ -4,10 +4,12 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Layout } from './components/shared/Layout';
 import { ShopPage } from './components/ShopPage';
 import { CartContextProvider } from 'context_providers/CartContext';
+import { Cart } from './components/Cart';
+import { ProductListComponent } from './components/ProductListComponent';
 
 import { faker } from '@faker-js/faker';
 
-const { Cart } = lazy(() => import('./components/Cart'));
+// const { Cart } = lazy(() => import('./components/Cart'));
 // const { ProductListComponent } = lazy(() =>
 //     import('./components/ProductListComponent')
 // );
@@ -35,7 +37,11 @@ const routes = [
         errorElement: <h1>Not Found</h1>,
         children: [
             { path: '/cart', element: <Cart /> },
-            // { path: '/products', element: <ProductListComponent />, loader: () => []},
+            {
+                path: '/products',
+                element: <ProductListComponent />,
+                loader: () => initialData,
+            },
             { path: '/', element: <ShopPage />, loader: () => initialData },
         ],
     },
