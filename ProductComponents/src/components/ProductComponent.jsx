@@ -10,9 +10,10 @@ const ProductComponent = ({ product }) => {
         <section style={{ backgroundColor: '#81ecec' }}>
             <main>Product: {product.name}</main>
             <aside>
-                <Link to={`/detail/${product.id}`}>
+                {/* FIXME: causes an error, likely because of the nested routing */}
+                {/* <Link to={`/detail/${product.id}`}>
                     <button>Show Detail</button>
-                </Link>
+                </Link> */}
             </aside>
         </section>
     );

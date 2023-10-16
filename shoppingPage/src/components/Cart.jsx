@@ -8,8 +8,9 @@ const Cart = () => {
         <div>
             Cart:
             {cartData &&
-                cartData.map((item, i) => (
-                    <div key={item.id + i}>
+                cartData.map((item) => (
+                    // If ItemID is not unique, then we need to merge the quantity
+                    <div key={item.id}>
                         Name: {item.name}
                         Price: {item.price}
                         <button onClick={() => removeCartItem(item.id)}>

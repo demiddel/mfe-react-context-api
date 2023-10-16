@@ -4,7 +4,6 @@ import {
     useLoaderData,
     useLocation,
     useNavigate,
-    useParams,
 } from 'react-router-dom';
 
 const ProductDetail = () => {
@@ -19,9 +18,9 @@ const ProductDetail = () => {
         return (
             <>
                 <div>No Product Data Available</div>
-                <Link to="/">
+                {/* <Link to="/">
                     <button>Go To Overview</button>
-                </Link>
+                </Link> */}
             </>
         );
     }

@@ -30,6 +30,7 @@ const render = (container, { defaultRouter, pathname, hydrationData }) => {
             children: [
                 {
                     path: '/',
+                    exact: true,
                     index: true,
                     element: <ProductListComponent />,
                     loader: () => initialData,
@@ -43,14 +44,17 @@ const render = (container, { defaultRouter, pathname, hydrationData }) => {
             ],
         },
     ];
+
     const router =
         defaultRouter ||
         createMemoryRouter(routes([]), {
-            basename: pathname,
-            initialEntries: [pathname],
+            basename: 'products',
+            initialEntries: ['/', '/detail/:id'],
             initialIndex: 0,
             hydrationData,
         });
+
+    // FIXME: if container is already a 'createRoot' instance, then skip it.
     const root = createRoot(container);
 
     root.render(<Root router={router} />);
