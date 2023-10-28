@@ -14,7 +14,7 @@ const ProductListComp = () => {
     //     const productContainer = document.getElementById('products-container');
     //     render(productContainer, {
     //         pathname,
-    //         hydrationData: loadedProducts,
+    //         initialData: loadedProducts,
     //     });
     // }, []);
 

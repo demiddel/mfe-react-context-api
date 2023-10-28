@@ -1,6 +1,6 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, createMemoryRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 
 import { Layout } from './components/shared/Layout';
 import Root from './App';
@@ -22,7 +22,7 @@ import { ErrorRoute } from './components/shared/ErrorRoute';
 //     { path: '/', element: <ProductListComponent />, loader: () => [] },
 // ];
 
-const render = (container, { defaultRouter, pathname, hydrationData }) => {
+const render = (container, { defaultRouter, initialData }) => {
     const routes = (initialData) => [
         {
             element: <Layout />,
@@ -47,12 +47,7 @@ const render = (container, { defaultRouter, pathname, hydrationData }) => {
 
     const router =
         defaultRouter ||
-        createMemoryRouter(routes([]), {
-            basename: 'products',
-            initialEntries: ['/', '/detail/:id'],
-            initialIndex: 0,
-            hydrationData,
-        });
+        createBrowserRouter(routes(initialData), { basename: '/product' });
 
     // FIXME: if container is already a 'createRoot' instance, then skip it.
     const root = createRoot(container);
