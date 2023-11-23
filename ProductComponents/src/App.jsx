@@ -1,14 +1,7 @@
 import React from 'react';
-import { Switch, Route, Router } from 'react-router-dom';
-import { ProductDetail } from './components/ProductDetail';
-import { ProductListComponent } from './components/ProductListComponent';
+import { RouterProvider } from 'react-router-dom';
 
-export default ({history, data}) => (
-    <Router history={history}>
-        <Switch>
-            <Route exact path="/detail/:id" render={props => <ProductDetail {...props} />} />
-            <Route path="/" render={
-                () => <ProductListComponent products={data} />} />
-        </Switch>
-    </Router>
-);
+// FIXME: When going to detail path, unable to see data
+// https://reactrouter.com/en/main/routers/router-provider
+// FIXME: The actual navigation is not working
+export default ({ router }) => <RouterProvider router={router} />;

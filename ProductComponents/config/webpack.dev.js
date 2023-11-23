@@ -13,6 +13,13 @@ const devConfig = {
         historyApiFallback: {
             index: '/index.html',
         },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods':
+                'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+            'Access-Control-Allow-Headers':
+                'X-Requested-With, content-type, Authorization',
+        },
     },
     plugins: [
         new ModuleFederationPlugin({
@@ -21,7 +28,8 @@ const devConfig = {
             exposes: {
                 './ProductComponents': './src/bootstrap',
                 './ProductComponent': './src/components/ProductComponent',
-                './ProductListComponent': './src/components/ProductListComponent',
+                './ProductListComponent':
+                    './src/components/ProductListComponent',
                 './ProductDetail': './src/components/ProductDetail',
             },
             shared: packageJson.dependencies,

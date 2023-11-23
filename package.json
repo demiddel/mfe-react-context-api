@@ -1,0 +1,15 @@
+{
+  "name": "mfe-react",
+  "version": "0.1.0",
+  "description": "React app for MFE",
+  "scripts": {
+    "start": "run-p start:*",
+    "start:cart": "cd CartComponent && npm start",
+    "start:product": "cd ProductComponents && npm start",
+    "start:context": "cd ContextProviders && npm start",
+    "start:shell": "cd shoppingPage && npm start"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

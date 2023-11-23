@@ -7,17 +7,13 @@ const ProductComponent = ({ product }) => {
     }
 
     return (
-        <section style={{"backgroundColor": "#81ecec"}}>
+        <section style={{ backgroundColor: '#81ecec' }}>
             <main>Product: {product.name}</main>
             <aside>
-                <Link
-                    to={{
-                        pathname: `/detail/${product.id}`,
-                        state: { product },
-                    }}
-                >
+                {/* FIXME: causes an error, likely because of the nested routing */}
+                {/* <Link to={`/detail/${product.id}`}>
                     <button>Show Detail</button>
-                </Link>
+                </Link> */}
             </aside>
         </section>
     );

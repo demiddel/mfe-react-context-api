@@ -1,47 +1,36 @@
-import React, { Fragment, useRef, useEffect, useContext } from "react";
-// import { render } from "product_components/ProductComponents";
-import { ProductComponent } from "product_components/ProductComponent";
-// import { useHistory } from "react-router-dom";
+import React, { Fragment, useContext, memo, useEffect } from 'react';
+import { useLocation, useLoaderData } from 'react-router-dom';
+
+import { render } from 'product_components/ProductComponents';
+import { ProductComponent } from 'product_components/ProductComponent';
 import { CartContext } from 'context_providers/CartContext';
 
-const ProductListComponent = ({ data }) => {
-  const { addCartItem } = useContext(CartContext);
+const ProductListComp = () => {
+    const loadedProducts = useLoaderData();
+    const { addCartItem } = useContext(CartContext);
+    const { pathname } = useLocation();
 
-  // TODO: This code is necessary to make routing work inside the Page wrapper
-  // currently to make the context work, this was removed. 
+    // useEffect(() => {
+    //     const productContainer = document.getElementById('products-container');
+    //     render(productContainer, {
+    //         pathname,
+    //         initialData: loadedProducts,
+    //     });
+    // }, []);
 
-  // const ref = useRef(null);
-  // const history = useHistory();
-
-  // useEffect(() => {
-  //   const { onParentNavigate } = render(ref.current, {
-  //     initialPath: history.location.pathname,
-  //     onNavigate: ({ pathname: nextPathname }) => {
-  //       const { pathname } = history.location;
-
-  //       if (pathname !== nextPathname) {
-  //         history.push(nextPathname);
-  //       }
-  //     },
-  //     initialData: data,
-  //   });
-
-  //   if (onParentNavigate) {
-  //     history.listen(onParentNavigate);
-  //   }
-  // }, []);
-
-  return (
-    data &&
-    data.map((p) => {
-        return (
-            <Fragment key={p.id}>
-                <ProductComponent product={p} />
-                <button onClick={() => addCartItem(p)}>Add Product</button>
-            </Fragment>
-        );
-    })
-);
+    return (
+        loadedProducts &&
+        loadedProducts.map((p) => {
+            return (
+                <Fragment key={p.id}>
+                    <ProductComponent product={p} />
+                    <button onClick={() => addCartItem(p)}>Add Product</button>
+                </Fragment>
+            );
+        })
+    );
 };
+
+const ProductListComponent = memo(ProductListComp);
 
 export { ProductListComponent };

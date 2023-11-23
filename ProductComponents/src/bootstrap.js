@@ -1,58 +1,105 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-import { createMemoryHistory, createBrowserHistory } from 'history';
-import App from './App';
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter } from 'react-router-dom';
+
+import { Layout } from './components/shared/Layout';
+import Root from './App';
 
 // TODO: only used for dev, might be a better solution so this isn't being imported
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
-const render = (
-    el,
-    { onNavigate, defaultHistory, initialPath, initialData }
-) => {
-    const history =
-        defaultHistory ||
-        createMemoryHistory({
-            initialEntries: [initialPath],
-        });
+import { ProductListComponent } from './components/ProductListComponent';
 
-    if (onNavigate) {
-        history.listen(onNavigate);
-    }
+// INFO: When testing with the Profiler, it looks that using the Lazy components are taking longer to load
+// const { ProductDetail } = lazy(() => import('./components/ProductDetail'));
+// const { ErrorRoute } = lazy(() => import('./components/shared/ErrorRoute'));
 
-    ReactDom.render(<App history={history} data={initialData} />, el);
+import { ProductDetail } from './components/ProductDetail';
+import { ErrorRoute } from './components/shared/ErrorRoute';
 
-    return {
-        onParentNavigate: ({ pathname: nextPathname }) => {
-            const { pathname } = history.location;
+// const routes = [
+//     { path: '/detail/:id', element: <ProductDetail /> },
+//     { path: '/', element: <ProductListComponent />, loader: () => [] },
+// ];
 
-            if (pathname !== nextPathname) {
-                history.push(nextPathname);
-            }
+const render = (container, { defaultRouter, initialData }) => {
+    const routes = (initialData) => [
+        {
+            element: <Layout />,
+            errorElement: <ErrorRoute />,
+            children: [
+                {
+                    path: '/',
+                    exact: true,
+                    index: true,
+                    element: <ProductListComponent />,
+                    loader: () => initialData,
+                },
+                {
+                    path: '/detail/:id',
+                    element: <ProductDetail />,
+                    loader: ({ params }) =>
+                        initialData.find((d) => d.id === Number(params.id)),
+                },
+            ],
         },
-    };
+    ];
+
+    const router =
+        defaultRouter ||
+        createBrowserRouter(routes(initialData), { basename: '/product' });
+
+    // FIXME: if container is already a 'createRoot' instance, then skip it.
+    const root = createRoot(container);
+
+    root.render(<Root router={router} />);
 };
 
 if (process.env.NODE_ENV === 'development') {
-    const el = document.querySelector('#_dev-product-components');
+    const container = document.querySelector('#_dev-product-components');
 
     const initialData = [
         {
             id: 1,
             name: faker.commerce.productName(),
             price: faker.commerce.price(),
-            color: faker.commerce.color(),
+            department: faker.commerce.department(),
         },
         {
             id: 2,
             name: faker.commerce.productName(),
             price: faker.commerce.price(),
-            color: faker.commerce.color(),
+            department: faker.commerce.department(),
         },
     ];
 
-    if (el) {
-        render(el, { defaultHistory: createBrowserHistory(), initialData });
+    if (container) {
+        //TODO: Need to refactor to pass initialData to the ProductListComponent
+        const routesWithInitialData = [
+            {
+                element: <Layout />,
+                errorElement: <ErrorRoute />,
+                children: [
+                    {
+                        path: '/',
+                        index: true,
+                        element: <ProductListComponent />,
+                        loader: () => initialData,
+                    },
+                    {
+                        path: '/detail/:id',
+                        element: <ProductDetail />,
+                        loader: ({ params }) =>
+                            initialData.find((d) => d.id === Number(params.id)),
+                    },
+                ],
+            },
+        ];
+
+        render(container, {
+            initialData,
+            defaultRouter: createBrowserRouter(routesWithInitialData),
+        });
     }
 }
 

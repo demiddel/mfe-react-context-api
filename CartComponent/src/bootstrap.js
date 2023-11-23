@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
-const render = (el, { initialData }) => {
-    ReactDom.render(<App data={initialData} />, el);
+const render = (container, { initialData }) => {
+    const root = createRoot(container)
+    root.render(<App data={initialData} />);
 };
 
 if (process.env.NODE_ENV === 'development') {
-    const el = document.querySelector('#_dev-cart');
+    const container = document.querySelector('#_dev-cart');
 
     const generateMockData = () => {
         let mockData = [];
@@ -19,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
                 id: i,
                 name: faker.commerce.productName(),
                 price: faker.commerce.price(),
-                color: faker.commerce.color(),
+                department: faker.commerce.department(),
                 amount: Math.ceil(Math.random() * 10),
             })
         }
@@ -27,8 +28,8 @@ if (process.env.NODE_ENV === 'development') {
     }
     const initialData = generateMockData();
 
-    if (el) {
-        render(el, { initialData });
+    if (container) {
+        render(container, { initialData });
     }
 }
 
