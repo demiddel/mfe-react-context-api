@@ -1,5 +1,5 @@
-# mfe-barcamp-react
-Micro Frontend using React
+# mfe-react-context-api
+Micro Frontend using React and a global Context for sharing state.
 
 ## Dev Setup
 Run in each folder:
